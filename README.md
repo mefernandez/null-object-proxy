@@ -26,7 +26,8 @@ public void doSomethingWith(Person person) {
 }
 ```
 
-Simple enough. But what if there are 10ths of properties to map? How about `a.getB().getC().getD()`? How fun would that be? 
+Simple enough. But what if there are **10ths** of properties to map? How about `a.getB().getC().getD()`? How fun would _that_ be? 
+
 Because, just like me, you _love_ writing defensive code in Java, right? :sarcasm: (oops, no emoji for that)
 
 # Null Object Pattern to the rescue!
@@ -54,7 +55,7 @@ public void doSomethingWith(Person person) {
 }
 ```
 
-But, what good that is? You still have to check if contact is `null` beforehand, except, now that code is separated from the mapping code. Can we take advantage of that? Can we do something to automagically set `null objects` for all properties that apply?
+But, what good that is? You still have to check if contact is `null` beforehand, except, now that code is separated from the mapping code. Can we take advantage of that? Can we do something to _automagically_ set `null objects` for all properties that apply?
 
 # An implementation of NullObject pattern with Dynamic Proxies
 
