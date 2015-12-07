@@ -3,7 +3,7 @@ Table of Contents:
 - [Null Object pattern to the rescue!](#null-object-pattern-to-the-rescue)
 - [An implementation of Null Object pattern with Dynamic Proxies](#an-implementation-of-nullobject-pattern-with-dynamic-proxies)
 - [An algorithm to wrap a graph of beans with Null Object](#an-algorithm-to-wrap-a-graph-of-beans-with-nullobject)
-- [How to use it](#how-to-use-it)
+- [How to use this on your project](#how-to-use-this-on-your-project)
 
 # Motivation
 
@@ -214,6 +214,19 @@ The algorithm looks simple, but there are some caveats:
 - Default values need to be added on the basis of what types you want to support.
 - As said before, the scenario is a tree of Bean dependencies (no closed loops). Watch out for graphs.
 
-# How to use it
+# How to use this on your project
 
-With caution, of course. 
+The "API" is dead simple:
+
+```java
+MyBean proxy = NullObjectFactory.wrap(someBean);
+// There. Go wild on that proxy. No NullPointerExceptions ahead.
+```
+
+About how to include this in your project: I wouldn't have the heart to ask you to put yet another dependency inside `pom.xml` (also, it's not up in http://search.maven.org yet). Maybe just a little bit of copy-paste of a few classes in this project would work just fine.
+
+**Disclaimer**: At the time of writing (December 2015), this project is in early stages, thus not fully ready for production. **So, beware!**
+
+# Comments welcome
+
+Oh yes please!
