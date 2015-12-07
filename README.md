@@ -59,3 +59,64 @@ But, what good that is? You still have to check if contact is `null` beforehand,
 
 # An implementation of NullObject pattern with Dynamic Proxies
 
+The idea is simple:
+
+> Wrap the target object an intercept all calls to methods, such that if the original call would return null, return a `NullObject` instead.
+
+So, we have to do 2 things:
+
+1. Intercept method calls
+2. Create `NullObject` instances of some `Class` known at runtime.
+ 
+This is a perfect job for [Dynamic Proxies](https://docs.oracle.com/javase/8/docs/technotes/guides/reflection/proxy.html).
+
+I use [Spring](http://spring.io/) on a daily basis, and I know Spring uses [AOP and Dynamic Proxies](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#aop-introduction-proxies) heavily to support annotations like [@Transactional](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#aop-introduction-proxies), but so far I've never needed to implement a Dynamic Proxy myself. Time to get my hands on this subject. Plus, this seems to be the perfect case to get started, doesn't it?
+
+**Disclaimer**: First thing I did was a Google search. I found [this article](http://www.codeproject.com/Articles/33409/Implementing-the-Null-Object-Pattern-with-a-proxy), but I wanted to give it a try myself.
+
+Let's go back to creating proxies and intercepting method calls. Java provides a way to do this via [java.lang.reflect.Proxy and java.lang.reflect.InvocationHandler](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html).
+
+Here's an example of a **nearly-pass-through** proxy that prefixes "Proxy says " to each call to `Foo.sayHello()`:
+
+```java
+public class PassThroughProxyTest {
+	
+	public interface FooInterface {
+
+		String sayHello();
+
+	}
+	
+	public static class Foo implements FooInterface {
+		
+		public String sayHello() {
+			return "Hello";
+		}
+		
+	}
+
+	@Test
+	public void test() {
+		final Foo foo = new Foo();
+		FooInterface proxy = (FooInterface) Proxy.newProxyInstance(Foo.class.getClassLoader(), new Class<?>[] { FooInterface.class }, new InvocationHandler() {
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+				return "Proxy says " + method.invoke(foo, args);
+			}
+			
+		});
+		
+		assertEquals("Proxy says Hello", proxy.sayHello());
+	}
+
+}
+```
+
+Wow, that's a little verbose for something so simple. Two things to take notice here:
+
+1. Java can only make proxies to `Interfaces`. That's why there's an (unnecessary) `FooInterface`, just for the sake of `java.lang.reflect.Proxy`.
+2. Standard `java.lang.reflect.InvocationHandler` doesn't take any object to wrap calls to, so I'm taking advantage of **anonymous classes** and pass `final Foo foo` instance to `method.invoke(foo, args)` that's defined in the scope of the `@Test`method.
+ 
+Now that we get a handle of how to make a Dynamic Proxy, let's move on to see how to get rid of the **Interfaces only** restiction, since we need to make proxies to plain old Java beans for our Mapper scenario.
+
+# Code generation, thanks cglib
+
