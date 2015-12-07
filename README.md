@@ -61,7 +61,7 @@ But, what good that is? You still have to check if contact is `null` beforehand,
 
 The idea is simple:
 
-> Wrap the target object an intercept all calls to methods, such that if the original call would return null, return a `NullObject` instead.
+> Wrap the target object and intercept all calls to methods, such that if the original call would return null, return a `NullObject` instead.
 
 So, we have to do 2 things:
 
@@ -180,5 +180,31 @@ String name = a.getB().getD().getName();
 // Do something with the name
 ```
 
-We need to **design an algorithm** that prevents `NullPointerException` from raising if `null` is encountered in that method calls chain.
+We need to **design an algorithm** that prevents `NullPointerException` from raising if `null` is encountered in that chain of method calls.
 
+Let's try this algorithm:
+
+1. Wrap the starting bean with a Dynamic Proxy to intercept method calls.
+2. If a call to a method returns `null`:
+  1. If the return type is one of [`String`, `Date`, etc.], then return a **default value** of that type.
+  2. Else, return a `NullObject` for that type.
+3. If a call to a method returns **not** `null`:
+  1. If the return type is one of [`String`, `Date`, etc.], then return **as is**.
+  2. Else, wrap it as in step 1 and return it.
+
+Piece of cake. **Default values** are convenient values of well-known Java types. For instance, we could pick:
+
+- `""` for `String`
+- `new Date(0L)` for `Date`
+- etc.
+
+Note that for **primitive types** there's no need to take care, since primitives define their own default values.
+
+The algorithm looks simple, but there are some caveats:
+
+- Trying to create `NullObject` for classes that **do not define an empty constructor** won't work out of the box.
+- Trying to create `NullObject` for Collections is kinda pesky.
+- Default values need to be added on the basis of what types you want to support.
+- As said before, the scenario is a tree of Bean dependencies (no closed loops). Watch out for graphs.
+
+# Usage
