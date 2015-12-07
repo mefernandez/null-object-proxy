@@ -74,6 +74,8 @@ I use [Spring](http://spring.io/) on a daily basis, and I know Spring uses [AOP 
 
 **Disclaimer**: First thing I did was a Google search. I found [this article](http://www.codeproject.com/Articles/33409/Implementing-the-Null-Object-Pattern-with-a-proxy), but I wanted to give it a try myself.
 
+## Dynamic Proxies, the Java way
+
 Let's go back to creating proxies and intercepting method calls. Java provides a way to do this via [java.lang.reflect.Proxy and java.lang.reflect.InvocationHandler](https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/Proxy.html).
 
 Here's an example of a **nearly-pass-through** proxy that prefixes "Proxy says " to each call to `Foo.sayHello()`:
@@ -118,5 +120,5 @@ Wow, that's a little verbose for something so simple. Two things to take notice 
  
 Now that we get a handle of how to make a Dynamic Proxy, let's move on to see how to get rid of the **Interfaces only** restiction, since we need to make proxies to plain old Java beans for our Mapper scenario.
 
-# Code generation, thanks cglib
+## Code generation: thanks cglib
 
