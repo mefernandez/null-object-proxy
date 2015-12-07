@@ -160,3 +160,25 @@ public class PassThroughCGLibProxyTest {
 ```
 
 Look Ma! No interfaces!
+
+So, now we have the essential tools to create **Dynamic Proxies** and **intercept method calls**. Next, we'll put these to work creating `NullObject` instances when appropriate.
+
+# An algorithm to wrap a graph of beans with NullObject
+
+It all starts with a plain old Java object, a _POJO_, or a Bean if you will. This Bean declares relationships with other Beans, which can be retrieved via getters. A picture worths a thousand words:
+
+![A tree of Beans](http://yuml.me/03404357)
+
+That's a _tree_ of related Beans. I know I mentioned a _graph_ earlier, but let's stick to a tree for now. Because XMas.
+
+Notice I've introduced a `java.lang.String` property in **Bean D**, because that's what you utterly need to work with in a Mapper: the value of a [`String`, `Date`, `int`, `boolean`, etc.].
+
+So, to get **String name** in **Bean D** starting from **Bean A** you would need to write a code like this:
+
+```java
+String name = a.getB().getD().getName();
+// Do something with the name
+```
+
+We need to **design an algorithm** that prevents `NullPointerException` from raising if `null` is encountered in that method calls chain.
+
