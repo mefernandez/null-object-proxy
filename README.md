@@ -32,7 +32,7 @@ Because, just like me, you _love_ writing defensive code in Java, right? :sarcas
 
 # Null Object Pattern to the rescue!
 
-I would describe [Null Object Pattern](https://en.wikipedia.org/wiki/Null_Object_pattern#Java) as a techinque for providing a **default object** when `null` is encountered.
+I would describe [Null Object Pattern](https://en.wikipedia.org/wiki/Null_Object_pattern#Java) as a technique for providing a **default object** when `null` is encountered.
 
 In the example above, a default (empty) contact whould be set before calling `doSomethingWith(person)` method.
 
