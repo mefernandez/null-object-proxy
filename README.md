@@ -1,3 +1,10 @@
+Table of Contents:
+- [Motivation](#motivation)
+- [Null Object pattern to the rescue!](#null-object-pattern-to-the-rescue)
+- [An implementation of Null Object pattern with Dynamic Proxies](#an-implementation-of-nullobject-pattern-with-dynamic-proxies)
+- [An algorithm to wrap a graph of beans with Null Object](#an-algorithm-to-wrap-a-graph-of-beans-with-nullobject)
+- [How to use it](#how-to-use-it)
+
 # Motivation
 
 Mappers. That's why.
@@ -207,4 +214,6 @@ The algorithm looks simple, but there are some caveats:
 - Default values need to be added on the basis of what types you want to support.
 - As said before, the scenario is a tree of Bean dependencies (no closed loops). Watch out for graphs.
 
-# Usage
+# How to use it
+
+With caution, of course. 
