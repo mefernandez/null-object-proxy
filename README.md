@@ -122,3 +122,41 @@ Now that we get a handle of how to make a Dynamic Proxy, let's move on to see ho
 
 ## Code generation: thanks cglib
 
+[cglib](https://github.com/cglib/cglib) is one of those libs you hear a lot about its magic, but that you never have to deal with it directly. **cglib** stands for Code Generation Library. It's the piece of our puzzle that will enable us to create Dynamic Proxies of _plain old Java beans_ that implement no interface at all.
+
+Using a code generation library sounds scary. Fortunately, [cglib's tutorial](https://github.com/cglib/cglib/wiki/Tutorial) is full of straight-forward examples (oh, examples!).
+
+The previous `nearly-pass-through` example would now look like this:
+
+```java
+public class PassThroughCGLibProxyTest {
+	
+	public static class Foo {
+		
+		public String sayHello() {
+			return "Hello";
+		}
+		
+	}
+
+	@Test
+	public void test() {
+		final Foo foo = new Foo();
+		
+		Enhancer enhancer = new Enhancer();
+		enhancer.setSuperclass(Foo.class);
+		enhancer.setCallback(new InvocationHandler() {
+			public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+				return "Proxy says " + method.invoke(foo, args);
+			}	
+		});
+		
+		Foo proxy = (Foo) enhancer.create();
+		
+		assertEquals("Proxy says Hello", proxy.sayHello());
+	}
+
+}
+```
+
+Look Ma! No interfaces!
