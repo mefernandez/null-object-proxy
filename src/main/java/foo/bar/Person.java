@@ -1,8 +1,11 @@
 package foo.bar;
 
+import java.util.Date;
+
 public class Person {
 	
 	private String name;
+	private Date birth;
 	private Salary salary;
 
 	public Salary getSalary() {
@@ -18,6 +21,14 @@ public class Person {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
 	}
 
 	
