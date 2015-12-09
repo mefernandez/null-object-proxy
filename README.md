@@ -229,4 +229,4 @@ About how to include this in your project: I wouldn't have the heart to ask you 
 
 # Comments welcome
 
-Oh yes please!
+Oh yes please! Open an issue if it's code-related or just mention [@eloy_iv](https://twitter.com/eloy_iv) at [Twitter](https://twitter.com)
