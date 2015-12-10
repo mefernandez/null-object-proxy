@@ -1,4 +1,4 @@
-Table of Contents:
+## Table of Contents:
 - [Motivation](#motivation)
 - [Null Object pattern to the rescue!](#null-object-pattern-to-the-rescue)
 - [An implementation of Null Object pattern with Dynamic Proxies](#an-implementation-of-nullobject-pattern-with-dynamic-proxies)
