@@ -1,3 +1,5 @@
+[ ![Codeship Status for mefernandez/null-object-proxy](https://codeship.com/projects/0f4b25b0-813d-0133-281b-6eebf45a905d/status?branch=master)](https://codeship.com/projects/121170)
+
 ## Table of Contents:
 - [Motivation](#motivation)
 - [Null Object pattern to the rescue!](#null-object-pattern-to-the-rescue)
