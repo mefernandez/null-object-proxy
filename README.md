@@ -81,7 +81,12 @@ This is a perfect job for [Dynamic Proxies](https://docs.oracle.com/javase/8/doc
 
 I use [Spring](http://spring.io/) on a daily basis, and I know Spring uses [AOP and Dynamic Proxies](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#aop-introduction-proxies) heavily to support annotations like [@Transactional](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/#aop-introduction-proxies), but so far I've never needed to implement a Dynamic Proxy myself. Time to get my hands on this subject. Plus, this seems to be the perfect case to get started, doesn't it?
 
-**Disclaimer**: First thing I did was a Google search. I found [this article](http://www.codeproject.com/Articles/33409/Implementing-the-Null-Object-Pattern-with-a-proxy), but I wanted to give it a try myself.
+### Preliminary searches for the state of the art
+
+First thing I did was a Google search. I found [this article](http://www.codeproject.com/Articles/33409/Implementing-the-Null-Object-Pattern-with-a-proxy), but I wanted to give it a try myself.
+
+**Edited**: A few days after writing this I came across [this article from RebelLabs](http://zeroturnaround.com/rebellabs/java-8-best-practices-cheat-sheet/) about [Java 8's `java.util.Optional`](https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html) I was not aware of.
+Although `java.util.Optional` aims at dealing with `null` references, it seems you need to use `lambdas` to access objects instead of just calling good ol' `getters`, so I still think this humble approach via Dynamic Proxies is still relevant. 
 
 ## Dynamic Proxies, the Java way
 
