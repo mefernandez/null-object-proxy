@@ -226,7 +226,7 @@ The algorithm looks simple, but there are some caveats:
 The "API" is dead simple:
 
 ```java
-MyBean proxy = NullObjectFactory.wrap(someBean);
+MyBean proxy = NullObjectProxyFactory.wrap(someBean);
 // There. Go wild on that proxy. No NullPointerExceptions ahead.
 ```
 
