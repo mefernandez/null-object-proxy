@@ -3,12 +3,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>foo.bar</groupId>
 	<artifactId>nullobject-proxy</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<dependencies>
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
-			<version>3.2.0</version>
+			<version>2.2.2</version>
 		</dependency>
 		<dependency>
 		    <groupId>junit</groupId>
