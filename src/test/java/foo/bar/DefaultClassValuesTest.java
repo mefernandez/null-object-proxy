@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-public class DefaultValuesTest {
+public class DefaultClassValuesTest {
 	
 	public static class DefaultValueTypeHolder {
 		private String stringValue;
