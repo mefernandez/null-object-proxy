@@ -51,4 +51,18 @@ public class NullObjectProxyTest {
 		assertEquals(new BigDecimal("1234.56"), proxy.getSalary().getNetSalary());
 	}
 
+	public static final class FinalTestClass {
+		
+	}
+	
+	/**
+	 * Actually this test show the limitations of the current implementation
+	 * to wrap a bean that is an instance of a final class; it will just return the bean as is.
+	 */
+	@Test
+	public void itReturnsOriginalBeanIfItIsInstanceOfFinalClass() {
+		FinalTestClass bean = new FinalTestClass();
+		FinalTestClass proxy = NullObjectProxyFactory.wrap(bean);
+		assertTrue(proxy == bean);
+	}
 }
