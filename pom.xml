@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>foo.bar</groupId>
 	<artifactId>nullobject-proxy</artifactId>
-	<version>0.0.3</version>
+	<version>0.0.4</version>
 	<dependencies>
 		<dependency>
 			<groupId>cglib</groupId>
