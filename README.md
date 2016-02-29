@@ -230,7 +230,18 @@ MyBean proxy = NullObjectProxyFactory.wrap(someBean);
 // There. Go wild on that proxy. No NullPointerExceptions ahead.
 ```
 
-About how to include this in your project: I wouldn't have the heart to ask you to put yet another dependency inside `pom.xml` (also, it's not up in http://search.maven.org yet). Maybe just a little bit of copy-paste of a few classes in this project would work just fine.
+To include this lib in your **Maven** project, add this to your `pom.xml`:
+
+```maven
+<dependency>
+	<groupId>com.github.mefernandez</groupId>
+	<artifactId>null-object-proxy</artifactId>
+	<version>0.0.4</version>
+</dependency>
+```
+
+Thanks [JitPack](https://jitpack.io/)!
+
 
 **Disclaimer**: At the time of writing (December 2015), this project is in early stages, thus not fully ready for production. **So, beware!**
 
