@@ -8,16 +8,21 @@ import net.sf.cglib.proxy.MethodProxy;
 
 public class NullObjectMethodInterceptor<T> implements MethodInterceptor {
 	
-	DefaultValueObjectProvider defaultValueObjectProvider = new DefaultValueObjectProvider();
+	DefaultValueObjectProvider defaultValueObjectProvider;
 
 	private final T original;
 
-	public NullObjectMethodInterceptor(T original) {
-		this.original = original;
-	}
-
 	public NullObjectMethodInterceptor() {
 		this(null);
+	}
+
+	public NullObjectMethodInterceptor(T original) {
+		this(original, null);
+	}
+
+	public NullObjectMethodInterceptor(T original, DefaultValueObjectProvider defaultValueObjectProvider) {
+		this.original = original;
+		this.defaultValueObjectProvider = defaultValueObjectProvider != null ? defaultValueObjectProvider : new StaticValueObjectProvider();
 	}
 
 	public Object intercept(Object obj, Method method, Object[] args, MethodProxy proxy)
@@ -33,7 +38,7 @@ public class NullObjectMethodInterceptor<T> implements MethodInterceptor {
 		Class<?> returnType = method.getReturnType();
 		
 		if (originalValue == null) {
-			Object defaultValue = defaultValueObjectProvider.getDefaultValueObject(returnType);
+			Object defaultValue = defaultValueObjectProvider.getDefaultValueObject(method);
 			if (defaultValue != null) {
 				return defaultValue;
 			}
